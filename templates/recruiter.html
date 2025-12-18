@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="margin-bottom:24px;">👔 Recruiter Dashboard</h2>
+
+<!-- Dashboard Cards -->
+<div style="
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap:24px;
+">
+
+    <!-- Resume Management -->
+    <div class="card">
+        <h3 style="margin-bottom:12px;">📂 Resume Management</h3>
+        <p style="color:#94a3b8;font-size:14px;margin-bottom:18px;">
+            View, screen, and analyze candidate resumes with ATS scores.
+        </p>
+
+        <a href="/resumes/all/" style="
+            display:inline-block;
+            width:100%;
+            text-align:center;
+            padding:12px;
+            background:linear-gradient(135deg,#22c55e,#16a34a);
+            color:#020617;
+            font-weight:600;
+            border-radius:8px;
+            text-decoration:none;
+        ">
+            View All Resumes
+        </a>
+    </div>
+
+    <!-- AI Insights -->
+    <div class="card">
+        <h3 style="margin-bottom:12px;">🤖 AI Insights</h3>
+        <p style="color:#94a3b8;font-size:14px;margin-bottom:16px;">
+            AI-powered resume screening insights
+        </p>
+
+        <ul style="list-style:none;padding:0;font-size:14px;color:#e5e7eb;">
+            <li>✔ ATS compatibility score</li>
+            <li>✔ Skill keyword matching</li>
+            <li>✔ Shortlisting assistance</li>
+            <li>✔ Faster hiring decisions</li>
+        </ul>
+    </div>
+
+    <!-- Hiring Stats -->
+    <div class="card">
+        <h3 style="margin-bottom:12px;">📊 Hiring Overview</h3>
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            margin-top:16px;
+            gap:12px;
+        ">
+            <div style="
+                flex:1;
+                background:#020617;
+                border:1px solid #1e293b;
+                border-radius:10px;
+                padding:16px;
+                text-align:center;
+            ">
+                <h4 style="color:#22c55e;">{{ total_resumes|default:"0" }}</h4>
+                <p style="font-size:13px;color:#94a3b8;">Total Resumes</p>
+            </div>
+
+            <div style="
+                flex:1;
+                background:#020617;
+                border:1px solid #1e293b;
+                border-radius:10px;
+                padding:16px;
+                text-align:center;
+            ">
+                <h4 style="color:#22c55e;">{{ shortlisted|default:"0" }}</h4>
+                <p style="font-size:13px;color:#94a3b8;">Shortlisted</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Logout -->
+<div style="margin-top:30px;text-align:right;">
+    <a href="/logout/" style="color:#ef4444;font-weight:500;">
+        Logout →
+    </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="margin-bottom:20px;">👋 Welcome, Candidate</h2>
+
+<!-- Dashboard Grid -->
+<div style="
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap:24px;
+">
+
+    <!-- Resume Upload Card -->
+    <div class="card">
+        <h3 style="margin-bottom:12px;">📄 Upload Your Resume</h3>
+        <p style="color:#94a3b8;font-size:14px;margin-bottom:18px;">
+            Upload your resume (PDF/DOCX) to get ATS score and job recommendations.
+        </p>
+
+        <form method="post" action="/resumes/upload/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file" required>
+            <button type="submit" style="margin-top:16px;width:100%;">
+                Upload Resume
+            </button>
+        </form>
+    </div>
+
+    <!-- ATS Score Card -->
+    <div class="card">
+        <h3 style="margin-bottom:12px;">📊 ATS Score</h3>
+        <p style="color:#94a3b8;font-size:14px;margin-bottom:12px;">
+            Latest resume ATS compatibility score
+        </p>
+
+        <div style="
+            font-size:42px;
+            font-weight:600;
+            color:#22c55e;
+            text-align:center;
+            margin:20px 0;
+        ">
+            {{ ats_score|default:"--" }}%
+        </div>
+
+        <p style="text-align:center;color:#94a3b8;font-size:13px;">
+            Higher score = better chances to pass ATS filters
+        </p>
+    </div>
+
+    <!-- Job Recommendations -->
+    <div class="card">
+    <h3>🧠 Extracted Skills</h3>
+    {% if skills %}
+        {% for skill in skills %}
+            <span style="
+                display:inline-block;
+                padding:6px 12px;
+                margin:6px;
+                border-radius:20px;
+                background:#1e293b;
+                color:#22c55e;
+                font-size:13px;
+            ">
+                {{ skill }}
+            </span>
+        {% endfor %}
+    {% else %}
+        <p style="color:#94a3b8;">No skills detected yet</p>
+    {% endif %}
+</div>
+
+</div>
+
+<!-- Logout -->
+<div style="margin-top:30px;text-align:right;">
+    <a href="/logout/" style="color:#ef4444;font-weight:500;">
+        Logout →
+    </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2 style="margin-bottom:20px;">📄 Candidate Resumes</h2>
+
+<div style="
+    overflow-x:auto;
+">
+
+<table style="
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0 12px;
+">
+
+    <thead>
+        <tr style="color:#94a3b8;font-size:13px;text-align:left;">
+            <th>Candidate</th>
+            <th>ATS Score</th>
+            <th>Status</th>
+            <th>Resume</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for r in resumes %}
+        <tr style="
+            background:#020617;
+            border:1px solid #1e293b;
+            border-radius:10px;
+        ">
+            <td style="padding:14px;">
+                <strong>{{ r.user.username }}</strong>
+            </td>
+
+            <td style="padding:14px;">
+                <span style="
+                    padding:6px 10px;
+                    border-radius:20px;
+                    font-size:13px;
+                    background:
+                        {% if r.ats_score >= 75 %}#22c55e
+                        {% elif r.ats_score >= 50 %}#facc15
+                        {% else %}#ef4444{% endif %};
+                    color:#020617;
+                    font-weight:600;
+                ">
+                    {{ r.ats_score }}%
+                </span>
+            </td>
+
+            <td style="padding:14px;">
+                {% if r.ats_score >= 75 %}
+                    <span style="color:#22c55e;font-weight:500;">Shortlisted</span>
+                {% elif r.ats_score >= 50 %}
+                    <span style="color:#facc15;font-weight:500;">Review</span>
+                {% else %}
+                    <span style="color:#ef4444;font-weight:500;">Rejected</span>
+                {% endif %}
+            </td>
+
+            <td style="padding:14px;">
+                <a href="{{ r.file.url }}" target="_blank" style="
+                    text-decoration:none;
+                    padding:8px 14px;
+                    border-radius:8px;
+                    background:#1e293b;
+                    color:#e5e7eb;
+                    font-size:13px;
+                ">
+                    View Resume
+                </a>
+            </td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="4" style="text-align:center;color:#94a3b8;padding:20px;">
+                No resumes uploaded yet.
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

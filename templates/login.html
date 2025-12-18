@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div style="
+    max-width:420px;
+    margin:40px auto;
+">
+
+    <h2 style="text-align:center;margin-bottom:10px;">
+        Welcome Back
+    </h2>
+
+    <p style="
+        text-align:center;
+        font-size:14px;
+        color:#94a3b8;
+        margin-bottom:24px;
+    ">
+        Login to your AI Resume Screening account
+    </p>
+
+    <form method="post" class="card">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div style="margin-bottom:16px;">
+                <label style="
+                    font-size:13px;
+                    color:#94a3b8;
+                ">
+                    {{ field.label }}
+                </label>
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color:#ef4444;font-size:12px;margin-top:4px;">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" style="width:100%;margin-top:10px;">
+            Login
+        </button>
+    </form>
+
+    <div style="
+        text-align:center;
+        margin-top:20px;
+        font-size:13px;
+        color:#94a3b8;
+    ">
+        Don’t have an account?
+    </div>
+
+    <div style="
+        display:flex;
+        justify-content:center;
+        gap:14px;
+        margin-top:10px;
+        flex-wrap:wrap;
+    ">
+        <a href="/signup/candidate/" style="
+            padding:10px 16px;
+            border:1px solid #22c55e;
+            border-radius:8px;
+            text-decoration:none;
+            color:#22c55e;
+            font-size:13px;
+            font-weight:500;
+        ">
+            Candidate Signup
+        </a>
+
+        <a href="/signup/recruiter/" style="
+            padding:10px 16px;
+            border:1px solid #3b82f6;
+            border-radius:8px;
+            text-decoration:none;
+            color:#3b82f6;
+            font-size:13px;
+            font-weight:500;
+        ">
+            Recruiter Signup
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}
