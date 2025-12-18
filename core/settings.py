@@ -6,7 +6,7 @@ SECRET_KEY = 'dev-key'
 
 DEBUG = True   # change to False in production
 
-ALLOWED_HOSTS = ['*','airesumeanalyzer.onrender.com']   # safe for dev, restrict later
+ALLOWED_HOSTS = ['*','airesumeanalyzer.onrender.com','airesumeanalyzer-5ass.onrender.com']   # safe for dev, restrict later
 
 INSTALLED_APPS = [
     'accounts',
